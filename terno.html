@@ -128,7 +128,16 @@
         <p class="description">
           O Terno Slim Azul da Suit House é ideal para ocasiões formais e casuais. Com corte moderno e tecido de alta qualidade, proporciona conforto e elegância ao mesmo tempo.
         </p>
-        <button class="buy-button">Adicionar ao Carrinho</button>
+        <button class="buy-button" onclick="addToCart('Terno Slim Azul', 699)">Adicionar ao Carrinho</button>
+
+<script>
+  function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push({ name, price });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert("Produto adicionado ao carrinho!");
+  }
+</script>
       </div>
     </div>
   </main>
