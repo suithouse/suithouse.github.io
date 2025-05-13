@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Seu Carrinho - Suit House</title>
+  <title>Carrinho - Suit House</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,7 +14,7 @@
 
     header {
       background-color: #222;
-      color: #fff;
+      color: white;
       padding: 20px;
       text-align: center;
     }
@@ -22,7 +22,7 @@
     .container {
       max-width: 800px;
       margin: 40px auto;
-      background-color: #fff;
+      background-color: white;
       padding: 30px;
       border-radius: 8px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -30,70 +30,53 @@
 
     h2 {
       margin-bottom: 20px;
-      font-size: 1.8rem;
-      color: #222;
     }
 
-    ul {
-      list-style: none;
-      padding: 0;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
     }
 
-    li {
-      padding: 15px;
+    th, td {
+      padding: 12px;
       border-bottom: 1px solid #ccc;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-align: left;
     }
 
-    li:last-child {
-      border-bottom: none;
-    }
-
-    .item-name {
-      font-size: 1.1rem;
-    }
-
-    .item-price {
-      font-weight: bold;
-      color: #1a8a34;
+    th {
+      background-color: #eee;
     }
 
     .remove-btn {
       background-color: #e74c3c;
       color: white;
       border: none;
-      padding: 6px 12px;
-      border-radius: 4px;
+      padding: 5px 10px;
       cursor: pointer;
+      border-radius: 4px;
     }
 
     .total {
-      font-size: 1.3rem;
-      margin-top: 20px;
       text-align: right;
+      font-size: 1.2rem;
       font-weight: bold;
     }
 
-    .actions {
-      margin-top: 30px;
-      text-align: center;
-    }
-
     .clear-btn {
+      display: block;
+      margin: 0 auto;
+      padding: 10px 20px;
       background-color: #555;
       color: white;
       border: none;
-      padding: 10px 20px;
-      font-size: 1rem;
       border-radius: 4px;
       cursor: pointer;
     }
 
     footer {
       background-color: #222;
-      color: #fff;
+      color: white;
       text-align: center;
       padding: 15px;
       margin-top: 40px;
@@ -104,16 +87,26 @@
 
   <header>
     <h1>Suit House</h1>
-    <h2>Seu Carrinho de Compras</h2>
+    <h2>Seu Carrinho</h2>
   </header>
 
   <div class="container">
-    <ul id="cart-items"></ul>
-    <p class="total" id="total">Total: R$0</p>
+    <table id="cart-table">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Preço</th>
+          <th>Quantidade</th>
+          <th>Total</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
 
-    <div class="actions">
-      <button class="clear-btn" onclick="clearCart()">Esvaziar Carrinho</button>
-    </div>
+    <p class="total" id="grand-total">Total: R$0</p>
+
+    <button class="clear-btn" onclick="clearCart()">Esvaziar Carrinho</button>
   </div>
 
   <footer>
@@ -122,38 +115,48 @@
 
   <script>
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const list = document.getElementById("cart-items");
-    const totalEl = document.getElementById("total");
+    const tbody = document.querySelector("#cart-table tbody");
+    const totalDisplay = document.getElementById("grand-total");
 
     function renderCart() {
-      list.innerHTML = "";
-      let total = 0;
+      tbody.innerHTML = "";
+      let grandTotal = 0;
 
       cart.forEach((item, index) => {
-        const li = document.createElement("li");
+        const row = document.createElement("tr");
 
-        const name = document.createElement("span");
-        name.className = "item-name";
-        name.textContent = item.name;
+        const nameCell = document.createElement("td");
+        nameCell.textContent = item.name;
 
-        const price = document.createElement("span");
-        price.className = "item-price";
-        price.textContent = `R$${item.price}`;
+        const priceCell = document.createElement("td");
+        priceCell.textContent = `R$${item.price}`;
 
-        const remove = document.createElement("button");
-        remove.className = "remove-btn";
-        remove.textContent = "Remover";
-        remove.onclick = () => removeItem(index);
+        const quantityCell = document.createElement("td");
+        quantityCell.textContent = item.quantity;
 
-        li.appendChild(name);
-        li.appendChild(price);
-        li.appendChild(remove);
-        list.appendChild(li);
+        const itemTotal = item.price * item.quantity;
+        const totalCell = document.createElement("td");
+        totalCell.textContent = `R$${itemTotal}`;
 
-        total += item.price;
+        const actionCell = document.createElement("td");
+        const removeBtn = document.createElement("button");
+        removeBtn.className = "remove-btn";
+        removeBtn.textContent = "Remover";
+        removeBtn.onclick = () => removeItem(index);
+        actionCell.appendChild(removeBtn);
+
+        row.appendChild(nameCell);
+        row.appendChild(priceCell);
+        row.appendChild(quantityCell);
+        row.appendChild(totalCell);
+        row.appendChild(actionCell);
+
+        tbody.appendChild(row);
+
+        grandTotal += itemTotal;
       });
 
-      totalEl.textContent = `Total: R$${total}`;
+      totalDisplay.textContent = `Total: R$${grandTotal}`;
     }
 
     function removeItem(index) {
