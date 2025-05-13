@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terno Slim Azul - Suit House</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header, footer {
+      background-color: #1c1c1c;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    nav {
+      margin-top: 1rem;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .product-image {
+      flex: 1 1 300px;
+      text-align: center;
+    }
+
+    .product-image img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .product-details {
+      flex: 2 1 400px;
+    }
+
+    .product-details h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .price {
+      font-size: 1.5rem;
+      color: #006400;
+      margin: 1rem 0;
+    }
+
+    .description {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .buy-button {
+      background-color: #000;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 1.5rem;
+    }
+
+    .buy-button:hover {
+      background-color: #333;
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .product-container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Suit House</h1>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="categoria.html">Categorias</a>
+      <a href="carrinho.html">Carrinho</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="product-container">
+      <div class="product-image">
+        <img src="gravata.webp" alt="Terno Slim Azul" />
+      </div>
+      <div class="product-details">
+        <h2>Gravata listrada</h2>
+        <p class="price">De <del>R$999</del> por <strong>R$699</strong></p>
+        <p class="description">
+         Gravata com listra        </p>
+        <button class="buy-button">Adicionar ao Carrinho</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Suit House. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
