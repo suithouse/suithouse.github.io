@@ -128,7 +128,16 @@
         <p class="price">De <del>R$999</del> por <strong>R$699</strong></p>
         <p class="description">
           Essa gravata elegante da mais alta costura vai elevar a sua elegância        </p>
-        <button class="buy-button">Adicionar ao Carrinho</button>
+       <button class="buy-button" onclick="addToCart('Terno Slim Azul', 699)">Adicionar ao Carrinho</button>
+
+<script>
+  function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.push({ name, price });
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert("Produto adicionado ao carrinho!");
+  }
+</script>
       </div>
     </div>
   </main>
