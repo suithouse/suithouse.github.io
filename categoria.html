@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suit House - Início</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background-color: #222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    nav a {
+      margin: 0 15px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin: 40px 0 20px;
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+      color: #222;
+    }
+
+    .product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-between;
+    }
+
+    .product {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      flex: 1 1 calc(33% - 20px);
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .product img {
+      width: 100%;
+      max-width: 150px;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+
+    .product h3 {
+      margin: 10px 0 5px;
+      font-size: 1.1rem;
+    }
+
+    .product p {
+      font-weight: bold;
+      color: #1a8a34;
+    }
+
+    footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .product {
+        flex: 1 1 48%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product {
+        flex: 1 1 100%;
+      }
+
+      nav a {
+        display: block;
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Suit House</h1>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="categoria.html">Categorias</a>
+      <a href="carrinho.html">Carrinho</a>
+      <a href="login.html">Logout</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Categorias em Destaque</h2>
+
+    <!-- Ternos -->
+    <h2>Ternos</h2>
+    <div class="product-grid">
+      <div class="product">
+        <a href="produto.html"><img src="terno.jpg" alt="Terno Slim Azul" /></a>
+        <h3><a href="produto.html">Terno Slim Azul</a></h3>
+        <p>De R$999 por R$699!</p>
+      </div>
+      <div class="product">
+        <a href="produto.html"><img src="cinza.jpg" alt="Terno Clássico Cinza" /></a>
+        <h3><a href="produto.html">Terno Clássico Cinza</a></h3>
+        <p>R$899</p>
+      </div>
+      <div class="product">
+        <a href="produto.html"><img src="preto.jpg" alt="Terno Preto Elegante" /></a>
+        <h3><a href="produto.html">Terno Preto Elegante</a></h3>
+        <p>R$1099</p>
+      </div>
+    </div>
+
+    <!-- Gravatas -->
+    <h2>Gravatas</h2>
+    <div class="product-grid">
+      <div class="product">
+        <a href="produto.html"><img src="gravata.jpg" alt="Gravata Seda Azul" /></a>
+        <h3><a href="produto.html">Gravata Seda Azul</a></h3>
+        <p>De R$199 por R$99!</p>
+      </div>
+      <div class="product">
+        <a href="produto.html"><img src="gravata-vermelha.jpg" alt="Gravata Vermelha Clássica" /></a>
+        <h3><a href="produto.html">Gravata Vermelha Clássica</a></h3>
+        <p>R$89</p>
+      </div>
+      <div class="product">
+        <a href="produto.html"><img src="gravata-preta.jpg" alt="Gravata Preta Fosca" /></a>
+        <h3><a href="produto.html">Gravata Preta Fosca</a></h3>
+        <p>De R$189 por R$99!</p>
+      </div>
+    </div>
+
+    <!-- Sapatos -->
+    <h2>Sapatos</h2>
+    <div class="product-grid">
+      <div class="product">
+        <a href="produto.html"><img src="sapato.jpg" alt="Sapato Marrom Elegante" /></a>
+        <h3><a href="produto.html">Sapato Marrom Elegante</a></h3>
+        <p>R$799</p>
+      </div>
+      <div class="product">
+        <a href="produto.html"><img src="sapato-preto.jpg" alt="Sapato Preto Clássico" /></a>
+        <h3><a href="produto.html">Sapato Preto Clássico</a></h3>
+        <p>R$849</p>
+      </div>
+      <div class="product">
+        <a href="produto.html"><img src="sapato-couro.jpg" alt="Sapato Couro Premium" /></a>
+        <h3><a href="produto.html">Sapato Couro Premium</a></h3>
+        <p>R$999</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Suit House. Todos os direitos reservados.</p>
+  </footer>
+</body>
+</html>
