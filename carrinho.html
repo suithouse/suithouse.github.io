@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seu Carrinho - Suit House</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: #222;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 15px;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    .item-name {
+      font-size: 1.1rem;
+    }
+
+    .item-price {
+      font-weight: bold;
+      color: #1a8a34;
+    }
+
+    .remove-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .total {
+      font-size: 1.3rem;
+      margin-top: 20px;
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .actions {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .clear-btn {
+      background-color: #555;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    footer {
+      background-color: #222;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Suit House</h1>
+    <h2>Seu Carrinho de Compras</h2>
+  </header>
+
+  <div class="container">
+    <ul id="cart-items"></ul>
+    <p class="total" id="total">Total: R$0</p>
+
+    <div class="actions">
+      <button class="clear-btn" onclick="clearCart()">Esvaziar Carrinho</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Suit House. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const list = document.getElementById("cart-items");
+    const totalEl = document.getElementById("total");
+
+    function renderCart() {
+      list.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const li = document.createElement("li");
+
+        const name = document.createElement("span");
+        name.className = "item-name";
+        name.textContent = item.name;
+
+        const price = document.createElement("span");
+        price.className = "item-price";
+        price.textContent = `R$${item.price}`;
+
+        const remove = document.createElement("button");
+        remove.className = "remove-btn";
+        remove.textContent = "Remover";
+        remove.onclick = () => removeItem(index);
+
+        li.appendChild(name);
+        li.appendChild(price);
+        li.appendChild(remove);
+        list.appendChild(li);
+
+        total += item.price;
+      });
+
+      totalEl.textContent = `Total: R$${total}`;
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    function clearCart() {
+      localStorage.removeItem("cart");
+      cart = [];
+      renderCart();
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
