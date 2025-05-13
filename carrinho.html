@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carrinho - Suit House</title>
   <style>
     body {
@@ -12,74 +12,58 @@
       padding: 0;
     }
 
-    header {
+    header, footer {
       background-color: #222;
       color: white;
-      padding: 20px;
       text-align: center;
+      padding: 20px;
     }
 
     .container {
       max-width: 800px;
       margin: 40px auto;
       background-color: white;
-      padding: 30px;
+      padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      margin-bottom: 20px;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 20px;
     }
 
     th, td {
-      padding: 12px;
-      border-bottom: 1px solid #ccc;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
       text-align: left;
-    }
-
-    th {
-      background-color: #eee;
     }
 
     .remove-btn {
       background-color: #e74c3c;
       color: white;
       border: none;
-      padding: 5px 10px;
-      cursor: pointer;
+      padding: 6px 10px;
       border-radius: 4px;
+      cursor: pointer;
     }
 
     .total {
       text-align: right;
-      font-size: 1.2rem;
       font-weight: bold;
+      font-size: 1.2em;
+      margin-top: 20px;
     }
 
     .clear-btn {
-      display: block;
-      margin: 0 auto;
-      padding: 10px 20px;
-      background-color: #555;
+      margin-top: 20px;
+      background-color: #444;
       color: white;
       border: none;
+      padding: 10px 20px;
       border-radius: 4px;
       cursor: pointer;
-    }
-
-    footer {
-      background-color: #222;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
+      display: block;
+      margin-left: auto;
     }
   </style>
 </head>
@@ -91,87 +75,86 @@
   </header>
 
   <div class="container">
-    <table id="cart-table">
+    <table>
       <thead>
         <tr>
           <th>Produto</th>
-          <th>Preço</th>
+          <th>Preço Unitário</th>
           <th>Quantidade</th>
           <th>Total</th>
           <th>Ação</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody id="cart-body"></tbody>
     </table>
 
-    <p class="total" id="grand-total">Total: R$0</p>
-
+    <p class="total" id="cart-total">Total: R$0</p>
     <button class="clear-btn" onclick="clearCart()">Esvaziar Carrinho</button>
   </div>
 
   <footer>
-    <p>&copy; 2025 Suit House. Todos os direitos reservados.</p>
+    <p>&copy; 2025 Suit House</p>
   </footer>
 
   <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const tbody = document.querySelector("#cart-table tbody");
-    const totalDisplay = document.getElementById("grand-total");
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const tbody = document.getElementById('cart-body');
+      const totalDisplay = document.getElementById('cart-total');
+      tbody.innerHTML = '';
 
-    function renderCart() {
-      tbody.innerHTML = "";
-      let grandTotal = 0;
+      let total = 0;
 
       cart.forEach((item, index) => {
-        const row = document.createElement("tr");
+        const row = document.createElement('tr');
 
-        const nameCell = document.createElement("td");
+        const nameCell = document.createElement('td');
         nameCell.textContent = item.name;
 
-        const priceCell = document.createElement("td");
-        priceCell.textContent = `R$${item.price}`;
+        const priceCell = document.createElement('td');
+        priceCell.textContent = `R$${item.price.toFixed(2)}`;
 
-        const quantityCell = document.createElement("td");
-        quantityCell.textContent = item.quantity;
+        const qtyCell = document.createElement('td');
+        qtyCell.textContent = item.quantity;
 
         const itemTotal = item.price * item.quantity;
-        const totalCell = document.createElement("td");
-        totalCell.textContent = `R$${itemTotal}`;
+        total += itemTotal;
 
-        const actionCell = document.createElement("td");
-        const removeBtn = document.createElement("button");
-        removeBtn.className = "remove-btn";
-        removeBtn.textContent = "Remover";
+        const totalCell = document.createElement('td');
+        totalCell.textContent = `R$${itemTotal.toFixed(2)}`;
+
+        const removeCell = document.createElement('td');
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.textContent = 'Remover';
         removeBtn.onclick = () => removeItem(index);
-        actionCell.appendChild(removeBtn);
+        removeCell.appendChild(removeBtn);
 
         row.appendChild(nameCell);
         row.appendChild(priceCell);
-        row.appendChild(quantityCell);
+        row.appendChild(qtyCell);
         row.appendChild(totalCell);
-        row.appendChild(actionCell);
+        row.appendChild(removeCell);
 
         tbody.appendChild(row);
-
-        grandTotal += itemTotal;
       });
 
-      totalDisplay.textContent = `Total: R$${grandTotal}`;
+      totalDisplay.textContent = `Total: R$${total.toFixed(2)}`;
     }
 
     function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
       cart.splice(index, 1);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      renderCart();
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
     }
 
     function clearCart() {
-      localStorage.removeItem("cart");
-      cart = [];
-      renderCart();
+      localStorage.removeItem('cart');
+      loadCart();
     }
 
-    renderCart();
+    loadCart();
   </script>
 </body>
 </html>
